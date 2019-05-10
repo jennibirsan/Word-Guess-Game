@@ -26,8 +26,10 @@ var listofRappers = [
     "Migos"
    ];
 
-// The below puesdocode was mimicked from Phil's example in class!!!! 
+// The below pseudocode was mimicked from Phil's example in class!!!! 
 // In my own words, I have commented below each function to discuss the meaning or reasoning, so it's not just copied w/o understanding.
+// Lastly, I found a website that has explained how to build a word guessing game. Link: https://nostarch.com/download/JS4K_ch7.pdf.
+// I used the pdf above to help explain and guide me through the game.
 
    var computerRandIndex  = math.floor(math.random() *  listofRappers.length);
    
@@ -52,5 +54,5 @@ var listofRappers = [
    var userInput = "";
 
    function resetGame () {
-      
+
    }
