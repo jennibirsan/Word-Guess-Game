@@ -1,3 +1,64 @@
-.body {
-    background-color: black;
+
+.container {
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    margin-bottom: 70px;
+    padding: 20px;
+    width: 70%;
+}
+
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+img {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    overflow: auto;
+}
+
+p {
+    padding-left: 10px;
+    align-items: center;
+}
+
+/* My font choice below doesn't work. */
+
+@font-face {
+    font-family: 'a_dripping_markerregular';
+    src: url('adrip1-webfont.woff2') format('woff2'),
+         url('adrip1-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+h1 {
+    font-family: 'a_dripping_markerregular', Arial, sans-serif;
+    font-weight:normal;
+    font-style:normal;
+    }
+
+
+#footer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-top: 4px solid #f8c521;
+    position: fixed;
+    bottom: 0;
+    height: 25px;
+    width: 100%;
+    background-color: #666666;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
 }

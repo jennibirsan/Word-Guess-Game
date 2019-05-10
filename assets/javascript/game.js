@@ -87,3 +87,13 @@ var userInput = "";
 function resetGame() {
 
 }
+
+// ----------- now that pseudocode is complete, we are activating the game below
+
+document.onkeyup = function(event) {
+
+   userInput = event.key.toLowerCase();
+   // This is necessary, so the game is not case sensitive. it just makes all letters lowercase even if the user inputs uppercase.
+
+
+}
