@@ -30,23 +30,6 @@ p {
     align-items: center;
 }
 
-/* My font choice below doesn't work. */
-
-@font-face {
-    font-family: 'a_dripping_markerregular';
-    src: url('adrip1-webfont.woff2') format('woff2'),
-         url('adrip1-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-h1 {
-    font-family: 'a_dripping_markerregular', Arial, sans-serif;
-    font-weight:normal;
-    font-style:normal;
-    }
-
 
 #footer {
     display: flex;

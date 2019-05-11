@@ -1,27 +1,27 @@
 var listofRappers = [
    "Tupac",
-   "Biggie Smalls",
-   "Jay Z",
+   "BiggieSmalls",
+   "JayZ",
    "Ludacris",
    "Plies",
    "Drake",
    "Eminem",
-   "Machine Gun Kelly",
-   "Childish Gambino",
+   "MachineGunKelly",
+   "ChildishGambino",
    "Logic",
-   "Kanye West",
-   "Juice WRLD",
-   "Maxo Kream",
-   "Gucci Mane",
-   "XXX Tentacion",
+   "KanyeWest",
+   "JuiceWRLD",
+   "MaxoKream",
+   "GucciMane",
+   "XXXTentacion",
    "Saweetie",
-   "T Pain",
-   "Chance the Rapper",
-   "Pusha T",
-   "Big Sean",
-   "Meek Mill",
-   "Kendrick Lamar",
-   "Vince Staples",
+   "TPain",
+   "ChancetheRapper",
+   "PushaT",
+   "BigSean",
+   "MeekMill",
+   "KendrickLamar",
+   "VinceStaples",
    "YG",
    "Migos"
 ];
@@ -45,7 +45,7 @@ var computerPickWord = listofRappers[computerRandIndex];
 
 // The computer picks a word from my index at random -- no specific order
 
-var numberofGuessCount = 7;
+var numberofGuessCount = 12;
 
 // The number of guesses allowed before player "loses" is 7. 
 
@@ -69,11 +69,11 @@ var boardGame = [];
 
 // boardGame is blank because it needs to be the length of the computerPickWord
 
-var remainingGuesses = document.getElementByID("remainingGuesses");
+var lettersLeft = document.getElementById("remainingGuesses");
 
 // We’ll use this variable to keep track of how many letters are left to be guessed. 
 
-var completeWins = document.getElementByID("wins");
+var completeWins = document.getElementById("wins");
 
 // We’ll use this variable to keep track of how many times the player has won. 
 
@@ -89,66 +89,66 @@ var userInput = "";
 // Will store any letter that the player inputs into the game
 
 function resetGame() {
-   var listofRappers = [
+   listofRappers = [
       "Tupac",
-      "Biggie Smalls",
-      "Jay Z",
+      "BiggieSmalls",
+      "JayZ",
       "Ludacris",
       "Plies",
       "Drake",
       "Eminem",
-      "Machine Gun Kelly",
-      "Childish Gambino",
+      "MachineGunKelly",
+      "ChildishGambino",
       "Logic",
-      "Kanye West",
-      "Juice WRLD",
-      "Maxo Kream",
-      "Gucci Mane",
-      "XXX Tentacion",
+      "KanyeWest",
+      "JuiceWRLD",
+      "MaxoKream",
+      "GucciMane",
+      "XXXTentacion",
       "Saweetie",
-      "T Pain",
-      "Chance the Rapper",
-      "Pusha T",
-      "Big Sean",
-      "Meek Mill",
-      "Kendrick Lamar",
-      "Vince Staples",
+      "TPain",
+      "ChancetheRapper",
+      "PushaT",
+      "BigSean",
+      "MeekMill",
+      "KendrickLamar",
+      "VinceStaples",
       "YG",
       "Migos"
    ];
-      computerRandIndex = Math.floor(Math.random() * listofRappers.length);
-      computerPickWord = listofRappers[computerRandIndex];
-      numberofGuessCount = 7;
-      wrongGuessLetter = "";
-      rightGuessLetter = "";
-      boardGame = [];
-      for (var i = 0; i < computerPickWord.length; i++) {
+   computerRandIndex = Math.floor(Math.random() * listofRappers.length);
+   computerPickWord = listofRappers[computerRandIndex];
+   numberofGuessCount = 12;
+   wrongGuessLetter = "";
+   rightGuessLetter = "";
+   boardGame = [];
+   for (var i = 0; i < computerPickWord.length; i++) {
       boardGame[i] = "_";
    }
-      remainingLetters = computerPickWord.length;
-      userInput = "";
+   remainingLetters = computerPickWord.length;
+   userInput = "";
 };
 // Note: I copied over all the elements that I want to access when resetting the game.  It was everything except the wins and losses b/c the player can continue to add to their wins and losses. 
 
 // ----------- now that pseudocode is complete, we are activating the game below // again, also using Phil's example from slack, class #hw-help.
 
 document.onkeyup = function (event) {
-
    userInput = event.key.toLowerCase();
-   var displayBoardDiv = document.getElementByID("output");
+   var displayBoardDiv = document.getElementById("output");
    displayBoardDiv.textContent = boardGame.join(" ");
-     
+
    if (computerPickWord.indexOf(userInput) > -1) {
+      console.log("this works!!");
       boardGame[computerPickWord.indexOf(userInput)] = userInput;
-      displayBoard.textContent = boardGame.join(" ");
+      displayBoardDiv.textContent = boardGame.join(" ");
       for (var j = 0; j < computerPickWord.length; j++) {
          if (computerPickWord[j] === userInput) {
-          boardGame[j] = userInput;
-          }
+            boardGame[j] = userInput;
          }
-         rightGuessLetter = rightGuessLetter + userInput;
+      }
+      rightGuessLetter = rightGuessLetter + userInput;
 
-      if(computerPickWord === rightGuessLetter) {
+      if (computerPickWord === rightGuessLetter) {
          wins++;
          completeWins.textContent = "Wins:" + wins;
          resetGame();
@@ -157,12 +157,13 @@ document.onkeyup = function (event) {
 
    }
    else {
+      lettersLeft.textContent = "Remaining Guesses: " + numberofGuessCount;
       numberofGuessCount = numberofGuessCount - 1;
       wrongGuessLetter = wrongGuessLetter + userInput + ", ";
-      var outputWrongDiv = document.getElementByID("wrongGuess");
-      outputWrongDiv.textContext = wrongGuessLetter;
-      if(numberofGuessCount === 0); {
-         loss++;
+      var outputWrongDiv = document.getElementById("wrongGuess");
+      outputWrongDiv.textContext += userInput + ", ";
+      if (numberofGuessCount === 0) {
+         losses++;
          outputWrongDiv.textContent = "";
          resetGame();
       };
