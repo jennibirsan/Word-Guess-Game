@@ -34,7 +34,7 @@ var listofRappers = [
 // Lastly, I found a website that has explained how to build a word guessing game. Link: https://nostarch.com/download/JS4K_ch7.pdf.
 // I used the pdf above to help explain and guide me through the game.
 
-var computerRandIndex = math.floor(math.random() * listofRappers.length);
+var computerRandIndex = Math.floor(Math.random() * listofRappers.length);
 
 // the computer picks my random word for the user to guess. 
 // You have to use math.floor(math.random()) to get a WHOLE number versus a random decimal. 
@@ -69,31 +69,103 @@ var boardGame = [];
 
 // boardGame is blank because it needs to be the length of the computerPickWord
 
-for (var i = 0; i < computerPickWord; i++) {
+var remainingGuesses = document.getElementByID("remainingGuesses");
+
+// We’ll use this variable to keep track of how many letters are left to be guessed. 
+
+var completeWins = document.getElementByID("wins");
+
+// We’ll use this variable to keep track of how many times the player has won. 
+
+for (var i = 0; i < computerPickWord.length; i++) {
    boardGame[i] = "_";
 }
 
 // For loop used for ending the loop of the computer picked word -- aka the number of characters in that randomly selected word.
 // This also initializes the underscores so user can see the amount of characters in the computerPickWord.
 
-var remainingLetters = computerPickWord.length;
-
-// We’ll use this variable to keep track of how many letters are left to be guessed. 
-
 var userInput = "";
 
 // Will store any letter that the player inputs into the game
 
 function resetGame() {
+   var listofRappers = [
+      "Tupac",
+      "Biggie Smalls",
+      "Jay Z",
+      "Ludacris",
+      "Plies",
+      "Drake",
+      "Eminem",
+      "Machine Gun Kelly",
+      "Childish Gambino",
+      "Logic",
+      "Kanye West",
+      "Juice WRLD",
+      "Maxo Kream",
+      "Gucci Mane",
+      "XXX Tentacion",
+      "Saweetie",
+      "T Pain",
+      "Chance the Rapper",
+      "Pusha T",
+      "Big Sean",
+      "Meek Mill",
+      "Kendrick Lamar",
+      "Vince Staples",
+      "YG",
+      "Migos"
+   ];
+      computerRandIndex = Math.floor(Math.random() * listofRappers.length);
+      computerPickWord = listofRappers[computerRandIndex];
+      numberofGuessCount = 7;
+      wrongGuessLetter = "";
+      rightGuessLetter = "";
+      boardGame = [];
+      for (var i = 0; i < computerPickWord.length; i++) {
+      boardGame[i] = "_";
+   }
+      remainingLetters = computerPickWord.length;
+      userInput = "";
+};
+// Note: I copied over all the elements that I want to access when resetting the game.  It was everything except the wins and losses b/c the player can continue to add to their wins and losses. 
 
-}
+// ----------- now that pseudocode is complete, we are activating the game below // again, also using Phil's example from slack, class #hw-help.
 
-// ----------- now that pseudocode is complete, we are activating the game below
-
-document.onkeyup = function(event) {
+document.onkeyup = function (event) {
 
    userInput = event.key.toLowerCase();
-   // This is necessary, so the game is not case sensitive. it just makes all letters lowercase even if the user inputs uppercase.
+   var displayBoardDiv = document.getElementByID("output");
+   displayBoardDiv.textContent = boardGame.join(" ");
+     
+   if (computerPickWord.indexOf(userInput) > -1) {
+      boardGame[computerPickWord.indexOf(userInput)] = userInput;
+      displayBoard.textContent = boardGame.join(" ");
+      for (var j = 0; j < computerPickWord.length; j++) {
+         if (computerPickWord[j] === userInput) {
+          boardGame[j] = userInput;
+          }
+         }
+         rightGuessLetter = rightGuessLetter + userInput;
 
+      if(computerPickWord === rightGuessLetter) {
+         wins++;
+         completeWins.textContent = "Wins:" + wins;
+         resetGame();
 
-}
+      };
+
+   }
+   else {
+      numberofGuessCount = numberofGuessCount - 1;
+      wrongGuessLetter = wrongGuessLetter + userInput + ", ";
+      var outputWrongDiv = document.getElementByID("wrongGuess");
+      outputWrongDiv.textContext = wrongGuessLetter;
+      if(numberofGuessCount === 0); {
+         loss++;
+         outputWrongDiv.textContent = "";
+         resetGame();
+      };
+   }
+
+};
