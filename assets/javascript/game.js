@@ -175,5 +175,5 @@ document.onkeyup = function (event) {
 // Problems I had: 
 // My wrong guessed letters did not appear on the game board 
 // My wins did not appear
-// Any words containing the letter P would not show up on the board. It kept docking down on "guesses remaining". 
+// Any words starting w/ the letters P or V (i am sure there are more) would not show up on the board. It kept docking down on "guesses remaining". 
 // When I would lose a Game, the wrong letters div would disappear
