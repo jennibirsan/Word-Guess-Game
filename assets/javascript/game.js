@@ -57,11 +57,11 @@ var losses = 0;
 
 // Losses starts at 0 and adds from there once word guess is not solved within the allotted number of guesses.
 
-var wrongGuessLetter = "";
+var wrongGuessLetter = " ";
 
 // when the wrong letter is guessed (by player), a string is formed on the game board displaying the wrong letters 
 
-var rightGuessLetter = "";
+var rightGuessLetter = " ";
 
 // when the right letter is guessed (by player), the letter appears on the board where the underscores are and reveals letters of the computerPickWord.
 
@@ -157,7 +157,8 @@ document.onkeyup = function (event) {
 
    }
    else {
-      lettersLeft.textContent = "Remaining Guesses: " + numberofGuessCount;
+      lettersLeft.textContent = "Remaining Guesses: " + numberofGuessCount
+         ;
       numberofGuessCount = numberofGuessCount - 1;
       wrongGuessLetter = wrongGuessLetter + userInput + ", ";
       var outputWrongDiv = document.getElementById("wrongGuess");
@@ -170,3 +171,9 @@ document.onkeyup = function (event) {
    }
 
 };
+
+// Problems I had: 
+// My wrong guessed letters did not appear on the game board 
+// My wins did not appear
+// Any words containing the letter P would not show up on the board. It kept docking down on "guesses remaining". 
+// When I would lose a Game, the wrong letters div would disappear
