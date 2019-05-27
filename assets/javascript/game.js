@@ -42,7 +42,7 @@ var computerRandIndex = Math.floor(Math.random() * listofRappers.length);
 // Use .length instead of the actual index number in case the length of the list ever changes.
 
 var computerPickWord = listofRappers[computerRandIndex];
-var computerPickWordLower= computerPickWord.toLowerCase();
+var computerPickWordLower = computerPickWord.toLowerCase();
 console.log(computerPickWordLower);
 
 // The computer picks a word from my index at random -- no specific order
@@ -112,7 +112,7 @@ function resetGame() {
 document.onkeyup = function (event) {
    userInput = event.key.toLowerCase();
    var displayBoardDiv = document.getElementById("output");
-   displayBoardDiv.textContent = boardGame.join(" ");   
+   displayBoardDiv.textContent = boardGame.join(" ");
    if (computerPickWordLower.indexOf(userInput) > -1) {
       boardGame[computerPickWordLower.indexOf(userInput)] = userInput;
       displayBoardDiv.textContent = boardGame.join(" ");
@@ -132,47 +132,47 @@ document.onkeyup = function (event) {
 
       };
 
-      for (var index = computerPickWordLower.indexOf(userInput) + 1; index < computerPickWordLower.length; index++){
+      for (var index = computerPickWordLower.indexOf(userInput) + 1; index < computerPickWordLower.length; index++) {
          if (computerPickWordLower.indexOf(userInput, index) > -1) {
             boardGame[computerPickWordLower.indexOf(userInput, index)] = userInput;
-      displayBoardDiv.textContent = boardGame.join(" ");
-      // for (var j = 0; j < computerPickWord.length; j++) {
-      //    if (computerPickWord[j] === userInput) {
-      //       boardGame[j] = userInput;
-      //    }
-      // }
-      //rightGuessLetter = rightGuessLetter + userInput;
-      rightGuessLetter = boardGame.join("").trim();
-      console.log(computerPickWordLower, rightGuessLetter)
-      if (computerPickWordLower === rightGuessLetter) {
-         console.log("win!")
-         wins++;
-         completeWins.textContent = "Wins:" + wins;
-         resetGame();
+            displayBoardDiv.textContent = boardGame.join(" ");
+            // for (var j = 0; j < computerPickWord.length; j++) {
+            //    if (computerPickWord[j] === userInput) {
+            //       boardGame[j] = userInput;
+            //    }
+            // }
+            //rightGuessLetter = rightGuessLetter + userInput;
+            rightGuessLetter = boardGame.join("").trim();
+            console.log(computerPickWordLower, rightGuessLetter)
+            if (computerPickWordLower === rightGuessLetter) {
+               console.log("win!")
+               wins++;
+               completeWins.textContent = "Wins:" + wins;
+               resetGame();
 
-      };
+            };
+         }
+
       }
+      // else {
+      //    lettersLeft.textContent = "Remaining Guesses: " + numberofGuessCount
+      //       ;
+      //    numberofGuessCount = numberofGuessCount - 1;
+      //    wrongGuessLetter = wrongGuessLetter + userInput + ", ";
+      //    var outputWrongDiv = document.getElementById("wrongGuess");
+      //    outputWrongDiv.textContext += userInput + ", ";
+      //    if (numberofGuessCount === 0) {
+      //       losses++;
+      //       outputWrongDiv.textContent = "";
+      //       resetGame();
+      //    };
+      // }
 
-   }
-   // else {
-   //    lettersLeft.textContent = "Remaining Guesses: " + numberofGuessCount
-   //       ;
-   //    numberofGuessCount = numberofGuessCount - 1;
-   //    wrongGuessLetter = wrongGuessLetter + userInput + ", ";
-   //    var outputWrongDiv = document.getElementById("wrongGuess");
-   //    outputWrongDiv.textContext += userInput + ", ";
-   //    if (numberofGuessCount === 0) {
-   //       losses++;
-   //       outputWrongDiv.textContent = "";
-   //       resetGame();
-   //    };
-   // }
+   };
 
-};
-
-// Problems I had: 
-// My wrong guessed letters did not appear on the game board 
-// My wins did not appear
-// Any words starting w/ the letters P or V (i am sure there are more) would not show up on the board. It kept docking down on "guesses remaining". 
-// When I would lose a Game, the wrong letters div would disappear
+   // Problems I had: 
+   // My wrong guessed letters did not appear on the game board 
+   // My wins did not appear
+   // Any words starting w/ the letters P or V (i am sure there are more) would not show up on the board. It kept docking down on "guesses remaining". 
+   // When I would lose a Game, the wrong letters div would disappear
 }
