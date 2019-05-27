@@ -42,6 +42,8 @@ var computerRandIndex = Math.floor(Math.random() * listofRappers.length);
 // Use .length instead of the actual index number in case the length of the list ever changes.
 
 var computerPickWord = listofRappers[computerRandIndex];
+var computerPickWordLower= computerPickWord.toLowerCase();
+console.log(computerPickWordLower);
 
 // The computer picks a word from my index at random -- no specific order
 
@@ -57,11 +59,11 @@ var losses = 0;
 
 // Losses starts at 0 and adds from there once word guess is not solved within the allotted number of guesses.
 
-var wrongGuessLetter = " ";
+var wrongGuessLetter = "";
 
 // when the wrong letter is guessed (by player), a string is formed on the game board displaying the wrong letters 
 
-var rightGuessLetter = " ";
+var rightGuessLetter = "";
 
 // when the right letter is guessed (by player), the letter appears on the board where the underscores are and reveals letters of the computerPickWord.
 
@@ -74,6 +76,7 @@ var lettersLeft = document.getElementById("remainingGuesses");
 // We’ll use this variable to keep track of how many letters are left to be guessed. 
 
 var completeWins = document.getElementById("wins");
+
 
 // We’ll use this variable to keep track of how many times the player has won. 
 
@@ -89,35 +92,9 @@ var userInput = "";
 // Will store any letter that the player inputs into the game
 
 function resetGame() {
-   listofRappers = [
-      "Tupac",
-      "BiggieSmalls",
-      "JayZ",
-      "Ludacris",
-      "Plies",
-      "Drake",
-      "Eminem",
-      "MachineGunKelly",
-      "ChildishGambino",
-      "Logic",
-      "KanyeWest",
-      "JuiceWRLD",
-      "MaxoKream",
-      "GucciMane",
-      "XXXTentacion",
-      "Saweetie",
-      "TPain",
-      "ChancetheRapper",
-      "PushaT",
-      "BigSean",
-      "MeekMill",
-      "KendrickLamar",
-      "VinceStaples",
-      "YG",
-      "Migos"
-   ];
    computerRandIndex = Math.floor(Math.random() * listofRappers.length);
    computerPickWord = listofRappers[computerRandIndex];
+   computerPickWordLower = computerPickWord.toLowerCase();
    numberofGuessCount = 12;
    wrongGuessLetter = "";
    rightGuessLetter = "";
@@ -135,19 +112,19 @@ function resetGame() {
 document.onkeyup = function (event) {
    userInput = event.key.toLowerCase();
    var displayBoardDiv = document.getElementById("output");
-   displayBoardDiv.textContent = boardGame.join(" ");
-
-   if (computerPickWord.indexOf(userInput) > -1) {
-      console.log("this works!!");
-      boardGame[computerPickWord.indexOf(userInput)] = userInput;
+   displayBoardDiv.textContent = boardGame.join(" ");   
+   if (computerPickWordLower.indexOf(userInput) > -1) {
+      boardGame[computerPickWordLower.indexOf(userInput)] = userInput;
       displayBoardDiv.textContent = boardGame.join(" ");
-      for (var j = 0; j < computerPickWord.length; j++) {
-         if (computerPickWord[j] === userInput) {
-            boardGame[j] = userInput;
-         }
-      }
-      rightGuessLetter = rightGuessLetter + userInput;
-
+      // for (var j = 0; j < computerPickWord.length; j++) {
+      //    if (computerPickWord[j] === userInput) {
+      //       boardGame[j] = userInput;
+      //    }
+      // }
+      //rightGuessLetter = rightGuessLetter + userInput;
+      rightGuessLetter = boardGame.join("").trim();
+      console.log(rightGuessLetter);
+      console.log(computerPickWordLower, rightGuessLetter)
       if (computerPickWord === rightGuessLetter) {
          wins++;
          completeWins.textContent = "Wins:" + wins;
@@ -155,20 +132,41 @@ document.onkeyup = function (event) {
 
       };
 
-   }
-   else {
-      lettersLeft.textContent = "Remaining Guesses: " + numberofGuessCount
-         ;
-      numberofGuessCount = numberofGuessCount - 1;
-      wrongGuessLetter = wrongGuessLetter + userInput + ", ";
-      var outputWrongDiv = document.getElementById("wrongGuess");
-      outputWrongDiv.textContext += userInput + ", ";
-      if (numberofGuessCount === 0) {
-         losses++;
-         outputWrongDiv.textContent = "";
+      for (var index = computerPickWordLower.indexOf(userInput) + 1; index < computerPickWordLower.length; index++){
+         if (computerPickWordLower.indexOf(userInput, index) > -1) {
+            boardGame[computerPickWordLower.indexOf(userInput, index)] = userInput;
+      displayBoardDiv.textContent = boardGame.join(" ");
+      // for (var j = 0; j < computerPickWord.length; j++) {
+      //    if (computerPickWord[j] === userInput) {
+      //       boardGame[j] = userInput;
+      //    }
+      // }
+      //rightGuessLetter = rightGuessLetter + userInput;
+      rightGuessLetter = boardGame.join("").trim();
+      console.log(computerPickWordLower, rightGuessLetter)
+      if (computerPickWordLower === rightGuessLetter) {
+         console.log("win!")
+         wins++;
+         completeWins.textContent = "Wins:" + wins;
          resetGame();
+
       };
+      }
+
    }
+   // else {
+   //    lettersLeft.textContent = "Remaining Guesses: " + numberofGuessCount
+   //       ;
+   //    numberofGuessCount = numberofGuessCount - 1;
+   //    wrongGuessLetter = wrongGuessLetter + userInput + ", ";
+   //    var outputWrongDiv = document.getElementById("wrongGuess");
+   //    outputWrongDiv.textContext += userInput + ", ";
+   //    if (numberofGuessCount === 0) {
+   //       losses++;
+   //       outputWrongDiv.textContent = "";
+   //       resetGame();
+   //    };
+   // }
 
 };
 
@@ -177,3 +175,4 @@ document.onkeyup = function (event) {
 // My wins did not appear
 // Any words starting w/ the letters P or V (i am sure there are more) would not show up on the board. It kept docking down on "guesses remaining". 
 // When I would lose a Game, the wrong letters div would disappear
+}
