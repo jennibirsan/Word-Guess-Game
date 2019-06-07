@@ -83,6 +83,11 @@ var completeWins = document.getElementById("wins");
 for (var i = 0; i < computerPickWord.length; i++) {
    boardGame[i] = "_";
 }
+console.log("-->", wins, losses, numberofGuessCount)
+$("#output").text(boardGame);
+$("#wins").text("Wins: " + wins);
+$("#losses").text("Losses: " + losses);
+$("#remainingGuesses").text("Remaining Guesses: " + numberofGuessCount);
 
 // For loop used for ending the loop of the computer picked word -- aka the number of characters in that randomly selected word.
 // This also initializes the underscores so user can see the amount of characters in the computerPickWord.
@@ -93,8 +98,11 @@ var userInput = "";
 
 function resetGame() {
    computerRandIndex = Math.floor(Math.random() * listofRappers.length);
+
    computerPickWord = listofRappers[computerRandIndex];
    computerPickWordLower = computerPickWord.toLowerCase();
+   console.log(computerPickWord)
+
    numberofGuessCount = 12;
    wrongGuessLetter = "";
    rightGuessLetter = "";
@@ -102,8 +110,13 @@ function resetGame() {
    for (var i = 0; i < computerPickWord.length; i++) {
       boardGame[i] = "_";
    }
-   remainingLetters = computerPickWord.length;
-   userInput = "";
+   //remainingLetters = computerPickWord.length;
+   //userInput = "";
+   $("#output").text(boardGame);
+   $("#wins").text("Wins: " + wins);
+   $("#losses").text("Losses: " + losses);
+   $("#remainingGuesses").text("Remaining Guesses: " + numberofGuessCount);
+
 };
 // Note: I copied over all the elements that I want to access when resetting the game.  It was everything except the wins and losses b/c the player can continue to add to their wins and losses. 
 
@@ -122,12 +135,14 @@ document.onkeyup = function (event) {
       //    }
       // }
       //rightGuessLetter = rightGuessLetter + userInput;
-      rightGuessLetter = boardGame.join("").trim();
-      console.log(rightGuessLetter);
-      console.log(computerPickWordLower, rightGuessLetter)
+      //rightGuessLetter = boardGame.join("").trim();
+      //console.log(rightGuessLetter);
+      //console.log(computerPickWordLower, rightGuessLetter)
+      console.log(computerPickWord, rightGuessLetter)
       if (computerPickWord === rightGuessLetter) {
          wins++;
-         completeWins.textContent = "Wins:" + wins;
+         console.log("wins")
+         // completeWins.textContent = "Wins:" + wins;
          resetGame();
 
       };
@@ -147,6 +162,7 @@ document.onkeyup = function (event) {
             if (computerPickWordLower === rightGuessLetter) {
                console.log("win!")
                wins++;
+
                completeWins.textContent = "Wins:" + wins;
                resetGame();
 
@@ -154,25 +170,23 @@ document.onkeyup = function (event) {
          }
 
       }
-      // else {
-      //    lettersLeft.textContent = "Remaining Guesses: " + numberofGuessCount
-      //       ;
-      //    numberofGuessCount = numberofGuessCount - 1;
-      //    wrongGuessLetter = wrongGuessLetter + userInput + ", ";
-      //    var outputWrongDiv = document.getElementById("wrongGuess");
-      //    outputWrongDiv.textContext += userInput + ", ";
-      //    if (numberofGuessCount === 0) {
-      //       losses++;
-      //       outputWrongDiv.textContent = "";
-      //       resetGame();
-      //    };
-      // }
+   }
+   else {
+      numberofGuessCount = numberofGuessCount - 1;
+      $("#remainingGuesses").text("Remaining Guesses: " + numberofGuessCount);
+      wrongGuessLetter = wrongGuessLetter + userInput + ", ";
+      $("#wrongGuess").text("Wrong Letter Guess: " + wrongGuessLetter);
+      if (numberofGuessCount === 0) {
+         console.log("losses")
+         losses++;
+         resetGame();
+      };
+   }
 
-   };
+};
 
    // Problems I had: 
    // My wrong guessed letters did not appear on the game board 
    // My wins did not appear
-   // Any words starting w/ the letters P or V (i am sure there are more) would not show up on the board. It kept docking down on "guesses remaining". 
+   // The first letter on each board would not appear. And multiple of the same letters wouldn't either.  It kept docking down on "guesses remaining". 
    // When I would lose a Game, the wrong letters div would disappear
-}
