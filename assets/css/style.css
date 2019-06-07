@@ -49,12 +49,10 @@ p {
 #wins {
     color: green;
 }
-#wrongGuess {
+#losses {
     color: red;
 }
-#remainingGuesses {
-    color: blue;
-}
+
 #output {
-    color: orange;
+    color: blue;
 }

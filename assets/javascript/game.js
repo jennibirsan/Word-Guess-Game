@@ -22,7 +22,6 @@ var listofRappers = [
    "MeekMill",
    "KendrickLamar",
    "VinceStaples",
-   "YG",
    "Migos"
 ];
 
@@ -110,8 +109,6 @@ function resetGame() {
    for (var i = 0; i < computerPickWord.length; i++) {
       boardGame[i] = "_";
    }
-   //remainingLetters = computerPickWord.length;
-   //userInput = "";
    $("#output").text(boardGame);
    $("#wins").text("Wins: " + wins);
    $("#losses").text("Losses: " + losses);
@@ -129,20 +126,10 @@ document.onkeyup = function (event) {
    if (computerPickWordLower.indexOf(userInput) > -1) {
       boardGame[computerPickWordLower.indexOf(userInput)] = userInput;
       displayBoardDiv.textContent = boardGame.join(" ");
-      // for (var j = 0; j < computerPickWord.length; j++) {
-      //    if (computerPickWord[j] === userInput) {
-      //       boardGame[j] = userInput;
-      //    }
-      // }
-      //rightGuessLetter = rightGuessLetter + userInput;
-      //rightGuessLetter = boardGame.join("").trim();
-      //console.log(rightGuessLetter);
-      //console.log(computerPickWordLower, rightGuessLetter)
       console.log(computerPickWord, rightGuessLetter)
       if (computerPickWord === rightGuessLetter) {
          wins++;
          console.log("wins")
-         // completeWins.textContent = "Wins:" + wins;
          resetGame();
 
       };
@@ -151,12 +138,6 @@ document.onkeyup = function (event) {
          if (computerPickWordLower.indexOf(userInput, index) > -1) {
             boardGame[computerPickWordLower.indexOf(userInput, index)] = userInput;
             displayBoardDiv.textContent = boardGame.join(" ");
-            // for (var j = 0; j < computerPickWord.length; j++) {
-            //    if (computerPickWord[j] === userInput) {
-            //       boardGame[j] = userInput;
-            //    }
-            // }
-            //rightGuessLetter = rightGuessLetter + userInput;
             rightGuessLetter = boardGame.join("").trim();
             console.log(computerPickWordLower, rightGuessLetter)
             if (computerPickWordLower === rightGuessLetter) {
@@ -175,7 +156,7 @@ document.onkeyup = function (event) {
       numberofGuessCount = numberofGuessCount - 1;
       $("#remainingGuesses").text("Remaining Guesses: " + numberofGuessCount);
       wrongGuessLetter = wrongGuessLetter + userInput + ", ";
-      $("#wrongGuess").text("Wrong Letter Guess: " + wrongGuessLetter);
+      $("#wrongGuess").text("Wrong Letters Guessed:" + wrongGuessLetter);
       if (numberofGuessCount === 0) {
          console.log("losses")
          losses++;
@@ -184,9 +165,3 @@ document.onkeyup = function (event) {
    }
 
 };
-
-   // Problems I had: 
-   // My wrong guessed letters did not appear on the game board 
-   // My wins did not appear
-   // The first letter on each board would not appear. And multiple of the same letters wouldn't either.  It kept docking down on "guesses remaining". 
-   // When I would lose a Game, the wrong letters div would disappear
