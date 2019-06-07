@@ -156,7 +156,7 @@ document.onkeyup = function (event) {
       numberofGuessCount = numberofGuessCount - 1;
       $("#remainingGuesses").text("Remaining Guesses: " + numberofGuessCount);
       wrongGuessLetter = wrongGuessLetter + userInput + ", ";
-      $("#wrongGuess").text("Wrong Letters Guessed:" + wrongGuessLetter);
+      $("#wrongGuess").text("Wrong Letters Guessed: " + wrongGuessLetter);
       if (numberofGuessCount === 0) {
          console.log("losses")
          losses++;
